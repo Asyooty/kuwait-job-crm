@@ -1,6 +1,9 @@
 @echo off
+REM Kuwait Job CRM - Windows EXE Builder
+REM This script builds the application and creates Windows installers
+
 echo ============================================
-echo Kuwait Job CRM - Windows EXE Builder
+echo Kuwait Job CRM - Windows EXE Builder v1.0
 echo ============================================
 echo.
 echo Step 1: Installing dependencies...
@@ -23,8 +26,31 @@ echo ============================================
 echo Build completed successfully!
 echo ============================================
 echo.
-echo The installer will be created in the 'dist' folder:
-echo - Kuwait Job CRM Setup (Installer)
-echo - Kuwait Job CRM Portable (Standalone EXE)
+echo Output files created in 'dist' folder:
+echo.
+echo 1. Kuwait Job CRM Setup.exe
+echo    - Full installer for Windows 10/11
+echo    - Creates Start Menu shortcuts
+echo    - Creates Desktop shortcut
+echo    - Size: ~200-300 MB
+echo.
+echo 2. Kuwait Job CRM-*-portable.exe
+echo    - Standalone portable executable
+echo    - No installation required
+echo    - Can run from USB drive
+echo    - Size: ~150-200 MB
+echo.
+echo Installation:
+echo - Run the .exe file
+echo - Follow the installation wizard
+echo - Application will be installed in Program Files
+echo.
+echo To launch after installation:
+echo - Click the Start Menu shortcut
+echo - Or double-click the Desktop shortcut
+echo.
+echo ============================================
+echo Thank you for using Kuwait Job CRM!
+echo ============================================
 echo.
 pause
