@@ -93,7 +93,7 @@ const template = [
     label: 'Help',
     submenu: [
       {
-        label: 'About',
+        label: 'About Kuwait Job CRM',
         click: () => {
           // You can create an about window here
         },
