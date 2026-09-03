@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { Company } from '../types';
 import { Plus, Trash2, Eye } from 'lucide-react';
 import { DialogBase } from './DialogBase';
@@ -18,10 +18,9 @@ export const CompaniesView: React.FC<CompaniesViewProps> = ({
   onDelete,
   searchQuery = '',
 }) => {
-  const [showDialog, setShowDialog] = useState(false);
-  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
+  const [showDialog, setShowDialog] = React.useState(false);
 
-  const filteredCompanies = useMemo(() => {
+  const filteredCompanies = React.useMemo(() => {
     if (!searchQuery) return companies;
     const q = searchQuery.toLowerCase();
     return companies.filter(
@@ -142,7 +141,7 @@ export const CompaniesView: React.FC<CompaniesViewProps> = ({
       <DialogBase
         isOpen={showDialog}
         onClose={() => setShowDialog(false)}
-        title="➕ Add New Company"
+        title="✚ Add New Company"
         size="lg"
       >
         <FormBuilder

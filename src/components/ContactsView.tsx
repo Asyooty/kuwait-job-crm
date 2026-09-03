@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Contact, Company } from '../types';
 import { Plus, Trash2, Mail } from 'lucide-react';
 import { DialogBase } from './DialogBase';
@@ -20,7 +20,7 @@ export const ContactsView: React.FC<ContactsViewProps> = ({
   onDelete,
   searchQuery = '',
 }) => {
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = React.useState(false);
 
   const filteredContacts = useMemo(() => {
     if (!searchQuery) return contacts;
@@ -101,12 +101,7 @@ export const ContactsView: React.FC<ContactsViewProps> = ({
               {filteredContacts.map(contact => {
                 const company = companies.find(c => c.id === contact.companyId);
                 return (
-                  <motion.tr
-                    key={contact.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    hover={{ backgroundColor: 'var(--bg-tertiary)' }}
-                  >
+                  <tr key={contact.id}>
                     <td className="font-semibold">{contact.fullName}</td>
                     <td className="text-text-secondary">{company?.name}</td>
                     <td className="text-text-secondary">{contact.jobTitle}</td>
@@ -135,7 +130,7 @@ export const ContactsView: React.FC<ContactsViewProps> = ({
                         </button>
                       </div>
                     </td>
-                  </motion.tr>
+                  </tr>
                 );
               })}
             </tbody>
@@ -147,7 +142,7 @@ export const ContactsView: React.FC<ContactsViewProps> = ({
       <DialogBase
         isOpen={showDialog}
         onClose={() => setShowDialog(false)}
-        title="➕ Add New Contact"
+        title="✚ Add New Contact"
         size="lg"
       >
         <FormBuilder

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Application, Activity } from '../types';
+import { Application } from '../types';
 import { ChartPanel } from './ChartPanel';
 import { TrendingUp, Mail, Zap } from 'lucide-react';
 
