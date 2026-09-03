@@ -1,22 +1,19 @@
 import React, { useMemo } from 'react';
 import { Application, Activity } from '../types';
 import { ChartPanel } from './ChartPanel';
-import { format } from 'date-fns';
-import { TrendingUp, Mail, MessageSquare, Zap } from 'lucide-react';
+import { TrendingUp, Mail, Zap } from 'lucide-react';
 
 interface AnalyticsModalProps {
   applications: Application[];
-  activities: Activity[];
 }
 
-export const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ applications, activities }) => {
+export const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ applications }) => {
   const analytics = useMemo(() => {
     const total = applications.length;
     const replied = applications.filter(a => a.status === 'replied').length;
     const interviewed = applications.filter(a => a.status === 'interview').length;
     const offers = applications.filter(a => a.status === 'offer').length;
 
-    // Applications by status
     const byStatus = [
       { name: 'Applied', value: applications.filter(a => a.status === 'applied').length },
       { name: 'Replied', value: replied },
@@ -25,17 +22,16 @@ export const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ applications, ac
       { name: 'Rejected', value: applications.filter(a => a.status === 'rejected').length },
     ];
 
-    // Timeline data (last 30 days)
     const timeline: Record<string, number> = {};
     for (let i = 29; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
-      const dateStr = format(date, 'MMM dd');
+      const dateStr = date.toLocaleDateString();
       timeline[dateStr] = 0;
     }
 
     applications.forEach(app => {
-      const appDate = format(new Date(app.applicationDate), 'MMM dd');
+      const appDate = new Date(app.applicationDate).toLocaleDateString();
       if (timeline.hasOwnProperty(appDate)) {
         timeline[appDate]++;
       }
@@ -43,19 +39,18 @@ export const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ applications, ac
 
     const timelineData = Object.entries(timeline).map(([date, count]) => ({ date, count }));
 
-    // Responses timeline
     const responseTimeline: Record<string, number> = {};
     for (let i = 29; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
-      const dateStr = format(date, 'MMM dd');
+      const dateStr = date.toLocaleDateString();
       responseTimeline[dateStr] = 0;
     }
 
     applications
       .filter(a => a.lastContactDate)
       .forEach(app => {
-        const contactDate = format(new Date(app.lastContactDate!), 'MMM dd');
+        const contactDate = new Date(app.lastContactDate!).toLocaleDateString();
         if (responseTimeline.hasOwnProperty(contactDate)) {
           responseTimeline[contactDate]++;
         }
@@ -79,7 +74,6 @@ export const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ applications, ac
 
   return (
     <div className="flex flex-col gap-6">
-      {/* KPI Cards */}
       <div className="grid grid-3 gap-4">
         <div className="card">
           <div className="flex items-center gap-3">
@@ -118,7 +112,6 @@ export const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ applications, ac
         </div>
       </div>
 
-      {/* Charts Grid */}
       <div className="grid grid-2 gap-4">
         <ChartPanel
           title="Applications by Status"

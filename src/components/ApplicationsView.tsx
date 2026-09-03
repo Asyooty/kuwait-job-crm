@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Application, Company, Contact } from '../types';
-import { Plus, Trash2, Edit2, Check } from 'lucide-react';
+import { Plus, Trash2, Edit2 } from 'lucide-react';
 import { DialogBase } from './DialogBase';
 import { FormBuilder } from './FormBuilder';
 import { motion } from 'framer-motion';
@@ -24,8 +24,8 @@ export const ApplicationsView: React.FC<ApplicationsViewProps> = ({
   onDelete,
   searchQuery = '',
 }) => {
-  const [showDialog, setShowDialog] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [showDialog, setShowDialog] = React.useState(false);
+  const [editingId, setEditingId] = React.useState<string | null>(null);
 
   const filteredApplications = useMemo(() => {
     if (!searchQuery) return applications;

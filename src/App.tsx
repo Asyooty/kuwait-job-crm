@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Company, Contact, Application, EmailTemplate, Activity } from './types';
 import { AppLayout } from './components/AppLayout';
 import { mockCompanies, mockContacts, mockApplications, mockEmailTemplates, mockActivities } from './data/mockData';
